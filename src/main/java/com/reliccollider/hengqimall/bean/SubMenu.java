@@ -1,0 +1,20 @@
+package com.reliccollider.hengqimall.bean;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
+@Data
+@TableName("subMenu")
+public class SubMenu {
+    private int id;
+    private String title;
+    private String path;
+
+    public SubMenu() {
+    }
+
+    public SubMenu(String title, String path) {
+        this.title = title;
+        this.path = path;
+    }
+}

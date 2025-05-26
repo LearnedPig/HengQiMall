@@ -1,5 +1,6 @@
 package com.reliccollider.hengqimall.controller;
 
+import com.reliccollider.hengqimall.back.Return;
 import com.reliccollider.hengqimall.bean.User;
 import com.reliccollider.hengqimall.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,12 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
     @RequestMapping("/login")
-    public String login(@RequestBody User user){
+    public Return login(@RequestBody User user){
         return loginService.login(user);
     }
 
     @RequestMapping("/register")
-    public String register(@RequestBody User user){
-        return loginService.login(user);
+    public Return register(@RequestBody User user){
+        return loginService.register(user);
     }
 }
