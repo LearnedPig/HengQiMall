@@ -2,11 +2,10 @@ package com.reliccollider.hengqimall.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.reliccollider.hengqimall.back.Return;
+import com.reliccollider.hengqimall.back.login.LoginReturn;
 import com.reliccollider.hengqimall.bean.User;
 import com.reliccollider.hengqimall.mapper.UserMapper;
 import com.reliccollider.hengqimall.security.JwtToken;
-import org.apache.el.parser.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,22 +17,22 @@ public class LoginService extends ServiceImpl<UserMapper, User> {
     private JwtToken jwtToken;
     private LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
 
-    public Return login(User user){
+    public LoginReturn login(User user){
         wrapper.eq(User::getUsername, user.getUsername());
         User sql_use=userMapper.selectOne(wrapper);
         if(sql_use!=null){
             if(user.getPassword().equals(sql_use.getPassword())){
                 String token=jwtToken.createToken(sql_use);
-                return new Return(true,200,"登陆成功！",token,sql_use);
+                return new LoginReturn(true,200,"登陆成功！",token,sql_use);
             } else{
-                return new Return(false,400,"账号密码错误！",null,null);
+                return new LoginReturn(false,400,"账号密码错误！",null,null);
             }
         } else{
-            return new Return(false,400,"账号不存在！",null,null);
+            return new LoginReturn(false,400,"账号不存在！",null,null);
         }
     }
 
-    public Return register(User user){
+    public LoginReturn register(User user){
         wrapper.eq(User::getUsername, user.getUsername());
         User sql_use=userMapper.selectOne(wrapper);
         if(sql_use==null){
@@ -41,9 +40,9 @@ public class LoginService extends ServiceImpl<UserMapper, User> {
             userMapper.insert(user);
             sql_use=userMapper.selectOne(wrapper);
             String token=jwtToken.createToken(sql_use);
-            return new Return(true,200,"注册成功！",token,sql_use);
+            return new LoginReturn(true,200,"注册成功！",token,sql_use);
         } else{
-            return new Return(true,400,"用户名已存在！",null,null);
+            return new LoginReturn(true,400,"用户名已存在！",null,null);
         }
     }
 }

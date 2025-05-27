@@ -1,17 +1,17 @@
-package com.reliccollider.hengqimall.back;
+package com.reliccollider.hengqimall.back.login;
 
 import com.reliccollider.hengqimall.bean.User;
 import lombok.Data;
 
 @Data
-public class ReturnData {
+public class LoginReturnData {
     private String token;
     private User userInfo;
 
-    public ReturnData() {
+    public LoginReturnData() {
     }
 
-    public ReturnData(String token, User user) {
+    public LoginReturnData(String token, User user) {
         this.token = token;
         this.userInfo = user;
     }

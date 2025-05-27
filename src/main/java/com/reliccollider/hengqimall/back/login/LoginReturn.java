@@ -1,12 +1,10 @@
-package com.reliccollider.hengqimall.back;
+package com.reliccollider.hengqimall.back.login;
 
 import com.reliccollider.hengqimall.bean.User;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
-public class Return {
+public class LoginReturn {
     /*
      * 1. 200 请求成功
      * 2. 400 请求参数失败
@@ -18,11 +16,11 @@ public class Return {
     private Boolean success;
     private int code;
     private String message;
-    private ReturnData data;
-    public Return(Boolean _success,int _code,String _message,String token, User user){
+    private LoginReturnData data;
+    public LoginReturn(Boolean _success, int _code, String _message, String token, User user){
         success=_success;
         code=_code;
         message=_message;
-        data=new ReturnData(token,user);
+        data=new LoginReturnData(token,user);
     }
 }
