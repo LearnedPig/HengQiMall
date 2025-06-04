@@ -15,9 +15,9 @@ public class LoginService extends ServiceImpl<UserMapper, User> {
     private UserMapper userMapper;
     @Autowired
     private JwtToken jwtToken;
-    private LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
 
     public LoginReturn login(User user){
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(User::getUsername, user.getUsername());
         User sql_use=userMapper.selectOne(wrapper);
         if(sql_use!=null){
@@ -33,6 +33,7 @@ public class LoginService extends ServiceImpl<UserMapper, User> {
     }
 
     public LoginReturn register(User user){
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(User::getUsername, user.getUsername());
         User sql_use=userMapper.selectOne(wrapper);
         if(sql_use==null){

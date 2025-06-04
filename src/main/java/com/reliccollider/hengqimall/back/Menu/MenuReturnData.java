@@ -1,4 +1,4 @@
-package com.reliccollider.hengqimall.back.onlode;
+package com.reliccollider.hengqimall.back.Menu;
 
 import com.reliccollider.hengqimall.bean.MainMenu;
 import lombok.Data;
@@ -6,13 +6,13 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class OnLodeReturnData {
+public class MenuReturnData {
     private List<MainMenu> mainMenu;
 
-    public OnLodeReturnData() {
+    public MenuReturnData() {
     }
 
-    public OnLodeReturnData(List<MainMenu> mainMenu) {
+    public MenuReturnData(List<MainMenu> mainMenu) {
         this.mainMenu = mainMenu;
     }
 }

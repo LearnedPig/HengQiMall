@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @TableName("subMenu")
 public class SubMenu {
-    private int id;
+    private Integer id;
     private String title;
     private String path;
     private int mid;

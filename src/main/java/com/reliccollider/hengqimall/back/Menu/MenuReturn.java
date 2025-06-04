@@ -1,11 +1,11 @@
-package com.reliccollider.hengqimall.back.onlode;
+package com.reliccollider.hengqimall.back.Menu;
 
 import com.reliccollider.hengqimall.bean.MainMenu;
 import lombok.Data;
 
 import java.util.List;
 @Data
-public class OnLodeReturn {
+public class MenuReturn {
     /*
      * 1. 200 请求成功
      * 2. 400 请求参数失败
@@ -17,15 +17,15 @@ public class OnLodeReturn {
     private Boolean success;
     private int code;
     private String message;
-    private OnLodeReturnData data;
+    private MenuReturnData data;
 
-    public OnLodeReturn() {
+    public MenuReturn() {
     }
 
-    public OnLodeReturn(Boolean success, int code, String message, List<MainMenu> mainMenu) {
+    public MenuReturn(Boolean success, int code, String message, List<MainMenu> mainMenu) {
         this.success = success;
         this.code = code;
         this.message = message;
-        this.data = new OnLodeReturnData(mainMenu);
+        this.data = new MenuReturnData(mainMenu);
     }
 }

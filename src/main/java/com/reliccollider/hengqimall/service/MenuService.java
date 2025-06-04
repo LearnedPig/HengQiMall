@@ -1,6 +1,6 @@
 package com.reliccollider.hengqimall.service;
 
-import com.reliccollider.hengqimall.back.onlode.OnLodeReturn;
+import com.reliccollider.hengqimall.back.Menu.MenuReturn;
 import com.reliccollider.hengqimall.bean.MainMenu;
 import com.reliccollider.hengqimall.bean.SubMenu;
 import com.reliccollider.hengqimall.mapper.MainMenuMapper;
@@ -18,7 +18,7 @@ public class MenuService {
     @Autowired
     private SubMenuMapper subMenuMapper;
 
-    public OnLodeReturn OnLode(){
+    public MenuReturn GetMenus(){
         List<MainMenu> mainMenus=mainMenuMapper.selectList(null);
         List<SubMenu> subMenus=subMenuMapper.selectList(null);
         for (MainMenu main:mainMenus) {
@@ -31,9 +31,9 @@ public class MenuService {
             main.setSubMenus(children);
         }
         if(!mainMenus.isEmpty()){
-            return new OnLodeReturn(true,200,"加载菜单成功！",mainMenus);
+            return new MenuReturn(true,200,"加载菜单成功！",mainMenus);
         } else{
-            return new OnLodeReturn(false,400,"加载菜单失败！",null);
+            return new MenuReturn(false,400,"加载菜单失败！",null);
         }
     }
 }
