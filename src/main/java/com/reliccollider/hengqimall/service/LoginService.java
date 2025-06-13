@@ -6,6 +6,8 @@ import com.reliccollider.hengqimall.back.login.LoginReturn;
 import com.reliccollider.hengqimall.bean.User;
 import com.reliccollider.hengqimall.mapper.UserMapper;
 import com.reliccollider.hengqimall.security.JwtToken;
+import com.reliccollider.hengqimall.util.RedisUtil;
+import io.netty.util.internal.ThreadLocalRandom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ public class LoginService extends ServiceImpl<UserMapper, User> {
     private UserMapper userMapper;
     @Autowired
     private JwtToken jwtToken;
+    @Autowired
+    private RedisUtil redisUtil;
 
     public LoginReturn login(User user){
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
@@ -44,6 +48,20 @@ public class LoginService extends ServiceImpl<UserMapper, User> {
             return new LoginReturn(true,200,"注册成功！",token,sql_use);
         } else{
             return new LoginReturn(true,400,"用户名已存在！",null,null);
+        }
+    }
+
+    public LoginReturn registerCode(String email){
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(User::getEmail, email);
+        User sql_use=userMapper.selectOne(wrapper);
+        if(sql_use==null){
+            int _code = ThreadLocalRandom.current().nextInt(100000, 1000000);
+            String code = String.valueOf(_code);
+            redisUtil.setCode(email,code,30L);
+            return new LoginReturn(true,200,"发送成功！",code,null);
+        } else{
+            return new LoginReturn(true,400,"发送失败！！",null,null);
         }
     }
 }

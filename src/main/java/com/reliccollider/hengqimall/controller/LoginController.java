@@ -21,4 +21,8 @@ public class LoginController {
     public LoginReturn register(@RequestBody User user){
         return loginService.register(user);
     }
+    @RequestMapping("/registerCode")
+    public LoginReturn register(String email){
+        return loginService.registerCode(email);
+    }
 }
